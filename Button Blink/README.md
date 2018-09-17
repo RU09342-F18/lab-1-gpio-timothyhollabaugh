@@ -1,4 +1,4 @@
-# Multiple Blink
+# Button Blink
 
 Blinks both of the onboard LEDs on the launchpads, according to a button being pressed.
 
