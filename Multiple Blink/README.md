@@ -1,22 +1,23 @@
 # Multiple Blink
-Now that we have blinked at least 1 LED, what about blinking multiple LEDS at the same time? The minimum that you need to develop is blinking at least two LEDs at two different rates. Although I am not going to give you a speed, you should probably pick a rate which is visible to a standard human. I really hope that you take this further and perform some of the extra work for this part of the lab exercise.
 
+Blinks both of the onboard LEDs on the launchpads.
 
-# YOU NEED TO CREATE THE FOLLOWING FOLDERS
-* MSP430G2553
-* MSP(FILL IN WITH WHAT YOU ARE USING)
+The MSP430G2553 and MSP430F5529 are officially supported, and the source code is in the g2553 and f5529 folders, respectivly.
 
-## README
-Remember to replace this README with your README once you are ready to submit. I would recommend either making a copy of this file or taking a screen shot. There might be a copy of all of these README's in a folder on the top level depending on the exercise.
+# Usage
 
-## Extra Work
-When you take a look at the development boards, you are limited to what is built into the platform.
+To change the pin (and thus the LED), change the #define in main.c. Note that only a couple pins actually have LEDs connected on the launchpads.
+If you want to use an enirely different port, you will need to change the P{1,4}* references throughout the code (P1OUT, P1DIR, P4OUT, P4DIR, etc)
 
-### Even More LEDs
-Since up to this point you should have hopefully noticed that you are simply just controlling each pin on your processor. So... what is keeping you from putting an LED on each pin? Can you actually control the speed of each of these LEDs?
+Each led has a pattern array defined for it. This array includes each of the 24 steps that the program will go through when flashing the LEDs. 24 steps was chosen because it allows there to be 12 periods, and 12 can be divisible by 3 and 4. This gives two different rates that are not multiples of each other.
 
-### Patterned Lights
-If you can control a ton of LEDs, what is keeping you from having a little fun? Why not try and make something like a moving face or other moving object in lights. *CAUTION* I would only do this if you have finished the rest of the lab.
+The step rate is defined by the for loop in the main body of the code. To change the rate, adjust the condition in the for loop.
 
-### UART Pattern Control
-If you have been using UART, could you set which LEDs are on or off based off some UART command? Would you want to send an Array over UART such as [1 0 1 0] or would you want to send a byte that corresponds to the status? Can you not only say which LEDs are on, but also tell them to blink at a particular rate if they were on (so LED1 Blink every 100ms)?
+# Compiling and uploading
+
+Ensure that you have msp430gcc installed. In particular, `msp430-elf-gcc` and `msp430-elf-objcopy` are used to compile the program and convert the elf to a hex for uploading.
+
+To flash the msp430, you will need the official TI MSP Flasher installed. It will need to be avaiable as `mspflash`. This allows a wrapper script to set the `LD_LIBRARY_PATH` correctly for MSP Flasher.
+
+Simply type `make` in the correct directory for your processor, and the program will be compiled and uploaded to an attached Launchpad.
+
