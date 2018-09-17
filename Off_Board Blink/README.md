@@ -9,12 +9,12 @@ This is meant to use off of the launchpad
 When the button is released, one of the LEDs will blink.
 If the button is pressed, the other LED will blink at a different rate
 
-The MSP430G2553 and MSP430F5529 are officially supported, and the source code is in the g2553 and f5529 folders, respectivly.
+The MSP430G2553 is officially supported, and the source code is in the g2553 folder.
 
 # Usage
 
 To change the pin (and thus the LED), change the #define in main.c.
-If you want to use an enirely different port, you will need to change the P{1,4}* references throughout the code (P1OUT, P1DIR, P4OUT, P4DIR, etc)
+If you want to use an enirely different port, you will need to change the P1* references throughout the code (P1OUT, P1DIR, etc)
 The same can be done for the button.
 
 Each led has a pattern array defined for it. This array includes each of the 24 steps that the program will go through when flashing the LEDs. 24 steps was chosen because it allows there to be 12 periods, and 12 can be divisible by 3 and 4. This gives two different rates that are not multiples of each other.
