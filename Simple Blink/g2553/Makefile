@@ -8,7 +8,7 @@ GDB     = $(GCC_DIR)/msp430-elf-gdb
 OBJCOPY = $(GCC_DIR)/msp430-elf-objcopy
 FLASH   = mspflash
 
-CFLAGS = -I $(SUPPORT_FILE_DIRECTORY) -mmcu=$(DEVICE) -O2 -g -Werror
+CFLAGS = -I $(SUPPORT_FILE_DIRECTORY) -mmcu=$(DEVICE) -O0 -g -Werror
 LFLAGS = -L $(SUPPORT_FILE_DIRECTORY) -T $(DEVICE).ld
 
 all: program
